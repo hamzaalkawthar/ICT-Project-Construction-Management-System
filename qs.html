@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildCore QS | Planning Engine</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1E293B;
+            --accent-color: #F59E0B;
+            --bg-color: #F8FAFC;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); }
+        .wrapper { display: flex; width: 100%; min-height: 100vh; }
+        .sidebar { width: 260px; background-color: var(--primary-color); color: #ffffff; flex-shrink: 0; padding: 1.5rem; }
+        .sidebar .nav-link { color: #94A3B8; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .sidebar .nav-link.active, .sidebar .nav-link:hover { background-color: rgba(255, 255, 255, 0.08); color: #ffffff; }
+        .main-content { flex-grow: 1; padding: 2rem; overflow-y: auto; }
+        .card { border: none; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03); background-color: #ffffff; }
+        .form-control, .form-select { padding: 0.75rem 1rem; border-color: #E2E8F0; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <nav class="sidebar">
+            <a class="d-flex align-items-center mb-4 text-decoration-none h4 fw-bold text-white" href="index.html">
+                <i class="fa-solid fa-helmet-safety me-2 text-warning"></i>BUILDCORE
+            </a>
+            <hr class="text-secondary">
+            <div class="nav flex-column">
+                <a href="admin.html" class="nav-link"><i class="fa-solid fa-sliders"></i> Admin Control</a>
+                <a href="qs.html" class="nav-link active"><i class="fa-solid fa-calendar-check"></i> QS Planning</a>
+                <a href="site-manager.html" class="nav-link"><i class="fa-solid fa-square-check"></i> Field Execution</a>
+                <a href="client.html" class="nav-link"><i class="fa-solid fa-chart-line"></i> Client Hub</a>
+                <hr class="text-secondary mt-4">
+                <a href="login.html" class="nav-link text-danger mt-auto"><i class="fa-solid fa-power-off"></i> Exit Session</a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="row align-items-center mb-4 g-3">
+                <div class="col-sm-7">
+                    <h1 class="h3 fw-bold m-0">Quantity Surveyor & Planning Engine</h1>
+                    <p class="text-muted small m-0">Define milestones, deploy structural timelines, and schedule inspections.</p>
+                </div>
+                <div class="col-sm-5 text-sm-end">
+                    <label class="small text-muted d-block mb-1 fw-semibold">Active Workspace Bounds</label>
+                    <select class="form-select d-inline-block w-auto border-secondary-subtle" id="siteSelector">
+                        <option>Metropolitan Commercial Tower (Site A)</option>
+                        <option>Aviation Hangar Annex (Site B)</option>
+                    </select>
+                </div>
+            </header>
+
+            <div class="row g-4">
+                <div class="col-xl-4">
+                    <div class="card p-4">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-calendar-plus text-warning me-2"></i>Schedule Phase Task</h5>
+                        <form id="taskSchedulerForm" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label small text-secondary fw-medium">Task Heading/Action Item</label>
+                                <input type="text" id="taskTitle" class="form-control" placeholder="e.g. Grade 4 Slab Core Pouring" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small text-secondary fw-medium">Operational Project Phase</label>
+                                <select id="taskPhase" class="form-select" required>
+                                    <option value="" disabled selected>Select structural tier...</option>
+                                    <option>Substructure Foundation</option>
+                                    <option>Superstructure Framing</option>
+                                    <option>MEP Rough-Ins</option>
+                                    <option>Interior Assemblies</option>
+                                </select>
+                            </div>
+                            <div class="row g-2 mb-4">
+                                <div class="col-6">
+                                    <label class="form-label small text-secondary fw-medium">Start Date</label>
+                                    <input type="date" id="startDate" class="form-control" required>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label small text-secondary fw-medium">Target Deadline</label>
+                                    <input type="date" id="endDate" class="form-control" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-dark w-100 py-2.5 fw-bold">Commit Task to Live Matrix</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-xl-8">
+                    <div class="card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold m-0">Dynamic Master Operation Roadmap</h5>
+                            <span class="badge bg-secondary-subtle text-dark px-3 py-1.5 rounded-pill font-monospace" id="taskCounter">3 Operational Tranches Loaded</span>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle m-0" id="taskMasterTable">
+                                <thead class="table-light text-secondary small">
+                                    <tr>
+                                        <th>Planned Task Directive</th>
+                                        <th>Structural Phase</th>
+                                        <th>Target Window</th>
+                                        <th>Status Context</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-site="Metropolitan Commercial Tower (Site A)">
+                                        <td class="fw-medium">Excavation & Shoring Clearance</td>
+                                        <td><span class="text-uppercase small font-monospace text-muted">Substructure Foundation</span></td>
+                                        <td class="small">Jan 02 &rarr; Jan 20</td>
+                                        <td><span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1">Verified Clear</span></td>
+                                    </tr>
+                                    <tr data-site="Metropolitan Commercial Tower (Site A)">
+                                        <td class="fw-medium">Steel Reinforcement Cage Setup</td>
+                                        <td><span class="text-uppercase small font-monospace text-muted">Superstructure Framing</span></td>
+                                        <td class="small">Jan 22 &rarr; Feb 10</td>
+                                        <td><span class="badge bg-warning-subtle text-warning border border-warning-subtle px-2.5 py-1">In Execution</span></td>
+                                    </tr>
+                                    <tr data-site="Aviation Hangar Annex (Site B)">
+                                        <td class="fw-medium">HVAC Main Duct Interfacing</td>
+                                        <td><span class="text-uppercase small font-monospace text-muted">MEP Rough-Ins</span></td>
+                                        <td class="small">Feb 15 &rarr; Mar 01</td>
+                                        <td><span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2.5 py-1">Awaiting Review</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Dynamic task counts and structural site segmentation filters
+            function computeMetrics() {
+                var chosenSite = $('#siteSelector').val();
+                var matchCount = 0;
+                $('#taskMasterTable tbody tr').each(function(){
+                    var rowSite = $(this).attr('data-site');
+                    if(rowSite === chosenSite){
+                        $(this).show();
+                        matchCount++;
+                    } else {
+                        $(this).hide();
+                    }
+                });
+                $('#taskCounter').text(`${matchCount} Active Items Filtered`);
+            }
+
+            $('#siteSelector').on('change', computeMetrics);
+            computeMetrics(); // First load computation
+
+            // Append input logs safely to DOM with dynamic parameters
+            $('#taskSchedulerForm').on('submit', function(e){
+                e.preventDefault();
+                var form = this;
+
+                if(!form.checkValidity()){
+                    $(form).addClass('was-validated');
+                    return false;
+                }
+
+                var tName = $('#taskTitle').val().trim();
+                var tPhase = $('#taskPhase').val();
+                var sDate = $('#startDate').val();
+                var eDate = $('#endDate').val();
+                var activeBounds = $('#siteSelector').val();
+
+                // Format Date structures elegantly for corporate visual parity
+                var formattedWindow = `${sDate} &rarr; ${eDate}`;
+
+                var taskRowTemplate = `<tr data-site="${activeBounds}">
+                    <td class="fw-medium">${tName}</td>
+                    <td><span class="text-uppercase small font-monospace text-muted">${tPhase}</span></td>
+                    <td class="small">${formattedWindow}</td>
+                    <td><span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2.5 py-1">Awaiting Review</span></td>
+                </tr>`;
+
+                $('#taskMasterTable tbody').append(taskRowTemplate);
+                form.reset();
+                $(form).removeClass('was-validated');
+                computeMetrics();
+            });
+        });
+    </script>
+</body>
+</html>
