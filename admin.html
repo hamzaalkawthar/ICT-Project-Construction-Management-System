@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildCore Admin | Control Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="sidebar">
+            <a class="brand-link" href="admin.html">
+                <span class="brand-mark"><i class="fa-solid fa-helmet-safety"></i></span>
+                <span>BUILD<span class="text-warning">CORE</span></span>
+            </a>
+            <div class="sidebar-label">Workspace</div>
+            <div class="nav flex-column">
+                <a href="admin.html" class="nav-link active"><i class="fa-solid fa-sliders"></i> Admin Control</a>
+                <div class="admin-submenu">
+                    <a href="project-management.html" class="nav-link"><i class="fa-solid fa-diagram-project"></i> Project Management</a>
+                    <a href="task-management.html" class="nav-link"><i class="fa-solid fa-list-check"></i> Task Management</a>
+                    <a href="employee-labor-management.html" class="nav-link"><i class="fa-solid fa-users-gear"></i> Employee & Labor</a>
+                    <a href="material-management.html" class="nav-link"><i class="fa-solid fa-boxes-stacked"></i> Material Management</a>
+                    <a href="equipment-management.html" class="nav-link"><i class="fa-solid fa-truck-pickup"></i> Equipment Management</a>
+                    <a href="budget-cost-management.html" class="nav-link"><i class="fa-solid fa-file-invoice-dollar"></i> Budget & Cost</a>
+                    <a href="subcontractor-supplier-management.html" class="nav-link"><i class="fa-solid fa-handshake"></i> Subcontractor & Supplier</a>
+                    <a href="document-management.html" class="nav-link"><i class="fa-solid fa-folder-open"></i> Document Management</a>
+                    <a href="site-monitoring.html" class="nav-link"><i class="fa-solid fa-eye"></i> Site Monitoring</a>
+                    <a href="communication-management.html" class="nav-link"><i class="fa-solid fa-comments"></i> Communication</a>
+                    <a href="reports-analytics.html" class="nav-link"><i class="fa-solid fa-chart-line"></i> Reports & Analytics</a>
+                    <a href="client-portal-management.html" class="nav-link"><i class="fa-solid fa-user-tie"></i> Client Portal</a>
+                </div>
+                <div class="sidebar-label">Role Portals</div>
+                <a href="qs.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i> QS Planning</a>
+                <a href="site-manager.html" class="nav-link"><i class="fa-solid fa-square-check"></i> Field Execution</a>
+                <a href="client.html" class="nav-link"><i class="fa-solid fa-chart-line"></i> Client Hub</a>
+                <a href="login.html" class="nav-link text-danger mt-3"><i class="fa-solid fa-power-off"></i> Exit Session</a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <div class="eyebrow">Admin Control</div>
+                    <h1 class="page-title">Construction Operations Command Center</h1>
+                    <p class="page-copy">Monitor projects, teams, resources, budgets, documents, communications, and client access from one administrative workspace.</p>
+                </div>
+                <button class="btn btn-dark d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#addSiteModal">
+                    <i class="fa-solid fa-circle-plus"></i> New Project Site
+                </button>
+            </header>
+
+            <section class="row g-4 mb-4">
+                <div class="col-xl-7">
+                    <div class="hero-panel">
+                        <div>
+                            <span class="status-pill warning mb-3"><i class="fa-solid fa-bolt"></i> Live Portfolio View</span>
+                            <h2 class="h1 fw-bold mb-3">3 active builds, 148 assigned workers, and 92.4% verified milestone reliability.</h2>
+                            <p class="text-white-50 mb-0">BuildCore is coordinating schedule health, site productivity, procurement approvals, and executive reporting across the active construction portfolio.</p>
+                        </div>
+                        <div class="row g-3 mt-3">
+                            <div class="col-sm-4"><div class="p-3 bg-white bg-opacity-10 rounded-2"><div class="small text-white-50">Open RFIs</div><div class="h4 fw-bold m-0">18</div></div></div>
+                            <div class="col-sm-4"><div class="p-3 bg-white bg-opacity-10 rounded-2"><div class="small text-white-50">Safety Score</div><div class="h4 fw-bold m-0">96%</div></div></div>
+                            <div class="col-sm-4"><div class="p-3 bg-white bg-opacity-10 rounded-2"><div class="small text-white-50">Cost Variance</div><div class="h4 fw-bold m-0">+2.8%</div></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-5">
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <div class="card metric-card h-100">
+                                <div class="metric-label">Active Projects</div>
+                                <div class="metric-value" id="kpiSites">3</div>
+                                <p class="small text-muted mb-0 mt-2">Portfolio sites under admin control.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card metric-card blue h-100">
+                                <div class="metric-label">System Users</div>
+                                <div class="metric-value" id="kpiUsers">148</div>
+                                <p class="small text-muted mb-0 mt-2">Admins, QS teams, supervisors, clients.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card metric-card green h-100">
+                                <div class="metric-label">Completed Tasks</div>
+                                <div class="metric-value">1,284</div>
+                                <p class="small text-muted mb-0 mt-2">Verified in the last 30 days.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card metric-card red h-100">
+                                <div class="metric-label">Critical Alerts</div>
+                                <div class="metric-value">7</div>
+                                <p class="small text-muted mb-0 mt-2">Need management decisions today.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="row g-4 mb-4">
+                <div class="col-lg-8">
+                    <div class="card p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center mb-3 gap-3 flex-wrap">
+                            <div>
+                                <h5 class="fw-bold mb-1">Portfolio Progress</h5>
+                                <p class="text-muted small m-0">Real-time delivery status by project.</p>
+                            </div>
+                            <span class="status-pill success"><i class="fa-solid fa-circle-check"></i> 2 projects on track</span>
+                        </div>
+                        <div id="globalProgressList">
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="fw-semibold">Metropolitan Commercial Tower</span>
+                                    <span class="fw-bold">75%</span>
+                                </div>
+                                <div class="progress" style="height: 9px;"><div class="progress-bar bg-dark" style="width: 75%"></div></div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="fw-semibold">Aviation Hangar Annex</span>
+                                    <span class="fw-bold">40%</span>
+                                </div>
+                                <div class="progress" style="height: 9px;"><div class="progress-bar bg-warning" style="width: 40%"></div></div>
+                            </div>
+                            <div>
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="fw-semibold">Waterfront Substation Upgrade</span>
+                                    <span class="fw-bold">62%</span>
+                                </div>
+                                <div class="progress" style="height: 9px;"><div class="progress-bar bg-success" style="width: 62%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card p-4 h-100">
+                        <h5 class="fw-bold mb-3">Management Decisions</h5>
+                        <div class="timeline-list">
+                            <div class="timeline-item">
+                                <h6 class="fw-bold mb-1">Approve steel purchase order</h6>
+                                <p class="small text-muted m-0">Material team requested batch release for Tower Site A.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h6 class="fw-bold mb-1">Review payroll exception</h6>
+                                <p class="small text-muted m-0">12 overtime entries need admin confirmation.</p>
+                            </div>
+                            <div class="timeline-item mb-0">
+                                <h6 class="fw-bold mb-1">Client invoice package</h6>
+                                <p class="small text-muted m-0">Finance report is ready for stakeholder portal release.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-4">
+                <div class="d-flex justify-content-between align-items-end mb-3 flex-wrap gap-2">
+                    <div>
+                        <h5 class="fw-bold mb-1">Admin Control Modules</h5>
+                        <p class="text-muted small m-0">Open a management page to administer each core construction workflow.</p>
+                    </div>
+                    <a href="reports-analytics.html" class="btn btn-outline-dark btn-sm"><i class="fa-solid fa-chart-simple me-1"></i> View Analytics</a>
+                </div>
+                <div class="row g-3">
+                    <div class="col-xl-3 col-md-4 col-sm-6"><div class="card module-card"><a href="project-management.html"><div class="module-icon"><i class="fa-solid fa-diagram-project"></i></div><h6 class="fw-bold">Project Management</h6><p class="small text-muted mb-0">Create projects, track deadlines, milestones, and status.</p></a></div></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><div class="card module-card"><a href="task-management.html"><div class="module-icon"><i class="fa-solid fa-list-check"></i></div><h6 class="fw-bold">Task Management</h6><p class="small text-muted mb-0">Assign tasks, priorities, deadlines, and updates.</p></a></div></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><div class="card module-card"><a href="employee-labor-management.html"><div class="module-icon"><i class="fa-solid fa-users-gear"></i></div><h6 class="fw-bold">Employee & Labor</h6><p class="small text-muted mb-0">Worker profiles, attendance, payroll, and site allocation.</p></a></div></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><div class="card module-card"><a href="material-management.html"><div class="module-icon"><i class="fa-solid fa-boxes-stacked"></i></div><h6 class="fw-bold">Material Management</h6><p class="small text-muted mb-0">Stock levels, purchase approvals, and inventory reports.</p></a></div></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><div class="card module-card"><a href="equipment-management.html"><div class="module-icon"><i class="fa-solid fa-truck-pickup"></i></div><h6 class="fw-bold">Equipment Management</h6><p class="small text-muted mb-0">Usage logs, availability, and preventive maintenance.</p></a></div></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><div class="card module-card"><a href="budget-cost-management.html"><div class="module-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div><h6 class="fw-bold">Budget & Cost</h6><p class="small text-muted mb-0">Budgets, expenses, cost variance, and reports.</p></a></div></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><div class="card module-card"><a href="subcontractor-supplier-management.html"><div class="module-icon"><i class="fa-solid fa-handshake"></i></div><h6 class="fw-bold">Subcontractor & Supplier</h6><p class="small text-muted mb-0">Vendor contacts, contracts, and delivery performance.</p></a></div></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><div class="card module-card"><a href="document-management.html"><div class="module-icon"><i class="fa-solid fa-folder-open"></i></div><h6 class="fw-bold">Document Management</h6><p class="small text-muted mb-0">Blueprints, permits, secure files, and sharing.</p></a></div></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><div class="card module-card"><a href="site-monitoring.html"><div class="module-icon"><i class="fa-solid fa-eye"></i></div><h6 class="fw-bold">Site Monitoring</h6><p class="small text-muted mb-0">Daily logs, photos, inspections, and incidents.</p></a></div></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><div class="card module-card"><a href="communication-management.html"><div class="module-icon"><i class="fa-solid fa-comments"></i></div><h6 class="fw-bold">Communication</h6><p class="small text-muted mb-0">Messages, alerts, announcements, and meetings.</p></a></div></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><div class="card module-card"><a href="reports-analytics.html"><div class="module-icon"><i class="fa-solid fa-chart-line"></i></div><h6 class="fw-bold">Reports & Analytics</h6><p class="small text-muted mb-0">Milestones, costs, depletion, and chart visuals.</p></a></div></div>
+                    <div class="col-xl-3 col-md-4 col-sm-6"><div class="card module-card"><a href="client-portal-management.html"><div class="module-icon"><i class="fa-solid fa-user-tie"></i></div><h6 class="fw-bold">Client Portal</h6><p class="small text-muted mb-0">Stakeholder tracking, invoice summaries, and targets.</p></a></div></div>
+                </div>
+            </section>
+
+            <section class="card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <div>
+                        <h5 class="fw-bold mb-1">Enterprise Workforce Directory</h5>
+                        <p class="text-muted small m-0">Administer role access and project allocations.</p>
+                    </div>
+                    <span class="status-pill">Updated 12 min ago</span>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle" id="userDirectoryTable">
+                        <thead>
+                            <tr>
+                                <th>Personnel</th>
+                                <th>Role</th>
+                                <th>Allocated Site</th>
+                                <th>Status</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-semibold">Sarah Jenkins</td>
+                                <td>Quantity Surveyor</td>
+                                <td>Metropolitan Commercial Tower</td>
+                                <td><span class="status-pill success">Active</span></td>
+                                <td class="text-end">
+                                    <button class="btn btn-sm btn-outline-secondary me-1 edit-user-btn"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger remove-user-btn"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-semibold">Marcus Vance</td>
+                                <td>Site Field Manager</td>
+                                <td>Aviation Hangar Annex</td>
+                                <td><span class="status-pill warning">On Site</span></td>
+                                <td class="text-end">
+                                    <button class="btn btn-sm btn-outline-secondary me-1 edit-user-btn"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger remove-user-btn"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <footer class="admin-footer">
+                <div class="footer-line d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <span><i class="fa-solid fa-helmet-safety text-warning me-1"></i> BuildCore Admin Control</span>
+                    <span>&copy; 2026 BuildCore Platforms Inc. All operations monitored securely.</span>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <div class="modal fade" id="addSiteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-2">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-building-circle-check text-warning me-2"></i>Register New Project Site</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="newSiteForm" novalidate>
+                    <div class="modal-body p-4">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small text-muted">Project Name</label>
+                            <input type="text" id="siteName" class="form-control" placeholder="e.g. North Ridge Logistics Park" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small text-muted">Location</label>
+                            <input type="text" id="siteLoc" class="form-control" placeholder="e.g. Sector 4 Industrial District" required>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-6">
+                                <label class="form-label fw-semibold small text-muted">Lead QS</label>
+                                <input type="text" id="siteQS" class="form-control" placeholder="S. Jenkins" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-semibold small text-muted">Site Manager</label>
+                                <input type="text" id="siteSM" class="form-control" placeholder="M. Vance" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-warning fw-bold">Create Site</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#newSiteForm').on('submit', function(e){
+                e.preventDefault();
+                var form = this;
+
+                if(!form.checkValidity()){
+                    $(form).addClass('was-validated');
+                    return false;
+                }
+
+                var sName = $('#siteName').val().trim();
+                var sLoc = $('#siteLoc').val().trim();
+                var qsPerson = $('#siteQS').val().trim();
+                var smPerson = $('#siteSM').val().trim();
+
+                $('#kpiSites').text(parseInt($('#kpiSites').text(), 10) + 1);
+                $('#kpiUsers').text(parseInt($('#kpiUsers').text(), 10) + 2);
+
+                $('#userDirectoryTable tbody')
+                    .append(`<tr><td class="fw-semibold">${qsPerson}</td><td>Quantity Surveyor</td><td>${sName}</td><td><span class="status-pill success">Active</span></td><td class="text-end"><button class="btn btn-sm btn-outline-secondary me-1 edit-user-btn"><i class="fa-solid fa-pen"></i></button><button class="btn btn-sm btn-outline-danger remove-user-btn"><i class="fa-solid fa-trash"></i></button></td></tr>`)
+                    .append(`<tr><td class="fw-semibold">${smPerson}</td><td>Site Field Manager</td><td>${sName}</td><td><span class="status-pill warning">On Site</span></td><td class="text-end"><button class="btn btn-sm btn-outline-secondary me-1 edit-user-btn"><i class="fa-solid fa-pen"></i></button><button class="btn btn-sm btn-outline-danger remove-user-btn"><i class="fa-solid fa-trash"></i></button></td></tr>`);
+
+                $('#globalProgressList').append(`<div class="mt-4"><div class="d-flex justify-content-between small mb-1"><span class="fw-semibold">${sName} (${sLoc})</span><span class="fw-bold">10%</span></div><div class="progress" style="height: 9px;"><div class="progress-bar bg-warning" style="width: 10%"></div></div></div>`);
+
+                bootstrap.Modal.getInstance(document.getElementById('addSiteModal')).hide();
+                form.reset();
+                $(form).removeClass('was-validated');
+            });
+
+            $(document).on('click', '.remove-user-btn', function(){
+                if(confirm('Revoke this user access from the admin directory?')){
+                    $(this).closest('tr').fadeOut(200, function(){
+                        $(this).remove();
+                        var currentUsers = parseInt($('#kpiUsers').text(), 10);
+                        if(currentUsers > 0) $('#kpiUsers').text(currentUsers - 1);
+                    });
+                }
+            });
+
+            $(document).on('click', '.edit-user-btn', function(){
+                alert('User edit panel is ready for backend integration.');
+            });
+        });
+    </script>
+</body>
+</html>

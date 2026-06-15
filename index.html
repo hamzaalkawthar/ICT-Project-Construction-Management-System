@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildCore | Universal Construction Management</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2 family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1E293B;
+            --accent-color: #F59E0B;
+            --bg-color: #F8FAFC;
+            --text-muted: #64748B;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            overflow-x: hidden;
+        }
+        
+        /* --- ANIMATION KEYFRAMES --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5); }
+            70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        }
+
+        /* --- SCROLL REVEAL UTILITY --- */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                        transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform, opacity;
+        }
+        .reveal-element.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background-color: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 1rem 2rem;
+            transition: background 0.3s ease;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        /* --- BUTTON CREATIVITY --- */
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: #111827;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .btn-accent:hover {
+            background-color: #D97706;
+            color: #111827;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+        }
+        .pulse-action {
+            animation: pulseGlow 2s infinite;
+        }
+
+        /* --- HERO & VIDEO BACKGROUND --- */
+        .hero-section {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+            background-color: #0F172A;
+        }
+        .video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.65;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+            z-index: 1;
+        }
+        /* Sequential staggered initial loading entries */
+        .hero-animate-1 { animation: fadeInUp 0.6s ease forward; }
+        .hero-animate-2 { animation: fadeInUp 0.8s ease forward; }
+        .hero-animate-3 { animation: fadeInUp 1s ease forward; }
+
+        /* --- CREATIVE STATS SECTION --- */
+        .counter-section {
+            background: linear-gradient(90deg, #1E293B 0%, #0F172A 100%);
+            color: white;
+            border-radius: 16px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        /* --- FEATURE MATRIX TRANSFORMS --- */
+        .feature-card {
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background-color: var(--accent-color);
+            transition: height 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 30px -10px rgba(30, 41, 59, 0.12);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+        .feature-card:hover::before {
+            height: 100%;
+        }
+        .icon-box {
+            width: 52px;
+            height: 52px;
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--accent-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.25rem;
+            transition: transform 0.4s ease, background-color 0.4s ease;
+        }
+        .feature-card:hover .icon-box {
+            transform: rotate(10deg) scale(1.1);
+            background-color: var(--accent-color);
+            color: #111827;
+        }
+        .feature-list {
+            padding-left: 0;
+            list-style: none;
+            margin-bottom: 0;
+        }
+        .feature-list li {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.2s ease;
+        }
+        .feature-card:hover .feature-list li {
+            transform: translateX(2px);
+        }
+        .feature-list li i {
+            color: #10B981;
+            margin-top: 4px;
+            font-size: 0.85rem;
+        }
+        
+
+.footer-wrapper {
+        background: radial-gradient(circle at bottom right, #1E293B, #0F172A);
+        color: #94A3B8;
+        padding: 6rem 0 2rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+    .footer-brand h2 {
+        font-weight: 800;
+        letter-spacing: -1px;
+    }
+    .footer-link-hover {
+        transition: all 0.3s ease;
+        padding-left: 0;
+        display: inline-block;
+    }
+    .footer-link-hover:hover {
+        color: var(--accent-color) !important;
+        transform: translateX(8px);
+    }
+    .social-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s ease;
+    }
+    .social-btn:hover {
+        background: var(--accent-color);
+        color: #111827;
+        transform: translateY(-5px);
+    }
+    .footer-cta {
+        background: rgba(245, 158, 11, 0.1);
+        border: 1px solid rgba(245, 158, 11, 0.2);
+        padding: 2rem;
+        border-radius: 20px;
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white d-flex align-items-center" href="index.html">
+                <i class="fa-solid fa-helmet-safety me-2" style="color: var(--accent-color)"></i>
+                BUILD<span style="color: var(--accent-color)">CORE</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center gap-3">
+                    <li class="nav-item"><a class="nav-link text-white-50" href="#capabilities">Project Scope</a></li>
+                    <li class="nav-item"><a class="nav-link text-white-50" href="#features">Platform Features</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-light px-4" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="btn btn-accent px-4 pulse-action" href="signup.html">Sign Up Free</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Background Video -->
+    <header class="hero-section position-relative overflow-hidden">
+        <video autoplay muted loop playsinline class="video-background">
+            <source src="https://www.pexels.com/download/video/14055246/" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="row">
+                <div class="col-lg-8">
+                    <span class="badge mb-3 px-3 py-2 text-uppercase font-monospace hero-animate-1" style="background-color: rgba(245, 158, 11, 0.25); color: var(--accent-color);">Dynamic System Framework</span>
+                    <h1 class="display-3 fw-bold mb-4 hero-animate-2">Construction Management for Projects of Any Scale</h1>
+                    <p class="lead text-white-50 mb-5 pe-lg-5 hero-animate-2">From single-family residential additions to multi-tiered commercial developments. Standardize your operations, optimize physical assets, and synchronize remote crews in real time.</p>
+                    <div class="d-flex flex-wrap gap-3 hero-animate-3">
+                        <a href="login.html?tab=signup" class="btn btn-accent btn-lg px-5 py-3">Register Now<i class="fa-solid fa-user-plus ms-2"></i></a>
+                        <a href="#features" class="btn btn-outline-light btn-lg px-4 py-3">View Matrix Blueprint</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<br><br><br><br>
+    <!-- Creative Interactive Stats Panel -->
+    <div class="container reveal-element">
+        <div class="counter-section p-4 p-md-5">
+            <div class="row g-4 text-center">
+                <div class="col-md-4">
+                    <h3 class="display-5 fw-bold text-warning mb-1"><span class="count-me" data-target="14200">0</span>+</h3>
+                    <p class="text-white-50 small text-uppercase font-monospace m-0">Crews Synchronized</p>
+                </div>
+                <div class="col-md-4 border-start border-end border-secondary border-opacity-25">
+                    <h3 class="display-5 fw-bold text-warning mb-1"><span class="count-me" data-target="98">0</span>%</h3>
+                    <p class="text-white-50 small text-uppercase font-monospace m-0">On-Time Blueprint Milestones</p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="display-5 fw-bold text-warning mb-1">$<span class="count-me" data-target="3.4" data-decimals="1">0</span>B</h3>
+                    <p class="text-white-50 small text-uppercase font-monospace m-0">Material Assets Tracked</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unified Scope Adaptability Section -->
+    <section id="capabilities" class="py-5 my-4 bg-white border-bottom reveal-element">
+        <div class="container my-3">
+            <div class="row g-4 text-center">
+                <div class="col-md-4">
+                    <div class="p-2">
+                        <i class="fa-solid fa-house-chimney text-warning display-6 mb-3"></i>
+                        <h5 class="fw-bold">Residential & Remodels</h5>
+                        <p class="text-muted small m-0">Scale down framework mechanics cleanly to supervise local housing builds, home renewals, and private architectural workflows.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-2">
+                        <i class="fa-solid fa-building text-warning display-6 mb-3"></i>
+                        <h5 class="fw-bold">Commercial Infrastructures</h5>
+                        <p class="text-muted small m-0">Incorporate heavy asset matrices, comprehensive logistical pipelines, and layered team systems flawlessly across multi-month project runs.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-2">
+                        <i class="fa-solid fa-trowel-bricks text-warning display-6 mb-3"></i>
+                        <h5 class="fw-bold">Specialty Subcontracting</h5>
+                        <p class="text-muted small m-0">Isolate task boards to power specialized independent teams like mechanical, technical wiring, or structural masonry outfits.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comprehensive 12-Feature Grid -->
+    <section id="features" class="py-5 my-4">
+        <div class="container">
+            <div class="text-center max-w-xl mx-auto mb-5 reveal-element">
+                <h2 class="fw-bold h1">Main Architecture of the Management System</h2>
+                <p style="color: var(--text-muted)">An integrated operational engine built to control field logistics, workforce alignment, and financial accountability.</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- 1. Project Management -->
+                <div class="col-lg-4 col-md-6 reveal-element">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body p-0">
+                            <div class="icon-box"><i class="fa-solid fa-diagram-project"></i></div>
+                            <h4 class="h5 fw-bold mb-3">1. Project Management</h4>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Create and manage construction projects</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Track project progress systematically</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Set project deadlines and milestones</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Monitor project status in real time</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Task Management -->
+                <div class="col-lg-4 col-md-6 reveal-element">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body p-0">
+                            <div class="icon-box"><i class="fa-solid fa-list-check"></i></div>
+                            <h4 class="h5 fw-bold mb-3">2. Task Management</h4>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Assign tasks to engineers, supervisors, and workers</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Track individual task completion</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Set priorities and operational deadlines</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Receive instantaneous task updates</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Employee & Labor Management -->
+                <div class="col-lg-4 col-md-6 reveal-element">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body p-0">
+                            <div class="icon-box"><i class="fa-solid fa-users-gear"></i></div>
+                            <h4 class="h5 fw-bold mb-3">3. Employee & Labor</h4>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Maintain clear worker profile records</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Track on-site daily attendance</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Manage complex salaries and payroll</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Assign workers to specific physical sites</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Material Management -->
+                <div class="col-lg-4 col-md-6 reveal-element">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body p-0">
+                            <div class="icon-box"><i class="fa-solid fa-boxes-stacked"></i></div>
+                            <h4 class="h5 fw-bold mb-3">4. Material Management</h4>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Track active construction materials</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Monitor real-time warehouse stock levels</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Request and approve material purchases</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Generate detailed inventory reports</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Equipment Management -->
+                <div class="col-lg-4 col-md-6 reveal-element">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body p-0">
+                            <div class="icon-box"><i class="fa-solid fa-truck-pickup"></i></div>
+                            <h4 class="h5 fw-bold mb-3">5. Equipment Management</h4>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Manage heavy machinery and field equipment</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Track variable equipment field usage</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Schedule routine preventive maintenance</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Record active equipment availability logs</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Budget & Cost Management -->
+                <div class="col-lg-4 col-md-6 reveal-element">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body p-0">
+                            <div class="icon-box"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                            <h4 class="h5 fw-bold mb-3">6. Budget & Cost</h4>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Create functional project cost budgets</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Track variable expenditures and expenses</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Compare estimated vs actual structural costs</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Generate comprehensive financial reports</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Contractor & Supplier Management -->
+                <div class="col-lg-4 col-md-6 reveal-element">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body p-0">
+                            <div class="icon-box"><i class="fa-solid fa-handshake"></i></div>
+                            <h4 class="h5 fw-bold mb-3">7. Subcontractor & Supplier</h4>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Store external contractor information</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Manage primary supplier contact profiles</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Track formal contracts and vendor agreements</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Monitor overall supplier delivery performance</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Document Management -->
+                <div class="col-lg-4 col-md-6 reveal-element">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body p-0">
+                            <div class="icon-box"><i class="fa-solid fa-folder-open"></i></div>
+                            <h4 class="h5 fw-bold mb-3">8. Document Management</h4>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Upload structural drawings and CAD blueprints</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Store legal contracts and municipal permits</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Manage project documentation securely</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Download and share active files instantly</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Site Monitoring -->
+                <div class="col-lg-4 col-md-6 reveal-element">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body p-0">
+                            <div class="icon-box"><i class="fa-solid fa-eye"></i></div>
+                            <h4 class="h5 fw-bold mb-3">9. Site Monitoring</h4>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Compile field-driven daily site logs</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Upload real visual progress photos</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Log regulatory safety inspection records</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Track structural site incidents and issues</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. Communication System -->
+                <div class="col-lg-4 col-md-6 reveal-element">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body p-0">
+                            <div class="icon-box"><i class="fa-solid fa-comments"></i></div>
+                            <h4 class="h5 fw-bold mb-3">10. Communication</h4>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Utilize localized, direct team messaging</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Deploy push notifications and critical alerts</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Broadcast urgent broad-team announcements</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Schedule engineering and planning meetings</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. Reports & Analytics -->
+                <div class="col-lg-4 col-md-6 reveal-element">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body p-0">
+                            <div class="icon-box"><i class="fa-solid fa-chart-line"></i></div>
+                            <h4 class="h5 fw-bold mb-3">11. Reports & Analytics</h4>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Export structural milestone reports</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Analyze actual vs projected budget reports</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Track raw material depletion reports</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Interact with dynamic data chart visuals</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12. Client Portal -->
+                <div class="col-lg-4 col-md-6 reveal-element">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body p-0">
+                            <div class="icon-box"><i class="fa-solid fa-user-tie"></i></div>
+                            <h4 class="h5 fw-bold mb-3">12. Client Portal</h4>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Enable stakeholder visual tracking entry</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Offer access to verified field invoice summaries</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Communicate directly with site managers</span></li>
+                                <li><i class="fa-solid fa-circle-check me-2"></i><span>Monitor upcoming construction targets</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+<!-- Footer -->
+    
+<footer class="footer-wrapper">
+    <div class="container">
+        <div class="row g-5 mb-5">
+            <div class="col-lg-4">
+                <div class="footer-brand mb-4">
+                    <a class="text-white d-flex align-items-center text-decoration-none h3" href="#">
+                        <i class="fa-solid fa-helmet-safety me-2" style="color: var(--accent-color)"></i>
+                        BUILD<span style="color: var(--accent-color)">CORE</span>
+                    </a>
+                </div>
+                <p class="mb-4">The ultimate architecture for modern construction. We simplify complex site logistics into elegant digital workflows.</p>
+                <div class="d-flex gap-3">
+                    <a href="#" class="social-btn text-white"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="social-btn text-white"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="social-btn text-white"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-4">
+                <h6 class="text-white fw-bold mb-4">Navigation</h6>
+                <ul class="list-unstyled d-flex flex-column gap-3">
+                    <li><a href="#capabilities" class="text-decoration-none text-white footer-link-hover">Project Scope</a></li>
+                    <li><a href="#features" class="text-decoration-none text-white footer-link-hover">Feature Matrix</a></li>
+                    <li><a href="#" class="text-decoration-none text-white footer-link-hover">API Docs</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-2 col-md-4">
+                <h6 class="text-white fw-bold mb-4">Account</h6>
+                <ul class="list-unstyled d-flex flex-column gap-3">
+                    <li><a href="login.html?tab=login" class="text-decoration-none text-white footer-link-hover">Sign In</a></li>
+                    <li><a href="login.html?tab=signup" class="text-decoration-none text-white footer-link-hover">Start Free Trial</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="footer-cta text-center text-lg-start">
+                    <h6 class="text-white fw-bold mb-3">Ready to build?</h6>
+                    <p class="small mb-3">Join 5,000+ construction teams streamlining their daily site reports.</p>
+                    <a href="login.html?tab=signup" class="btn btn-accent btn-sm px-4">Get Started Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-4 border-top border-secondary border-opacity-25 d-flex justify-content-between flex-wrap align-items-center">
+            <p class="small text-white m-0">&copy; 2026 BuildCore Platforms Inc. Crafted for the future of building.</p>
+            <div class="d-flex gap-4 small">
+                <a href="#" class="text-white text-decoration-none">Privacy Policy</a>
+                <a href="#" class="text-white text-decoration-none">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            
+            // 1. Intersection Observer for Smooth Scroll Reveal Transitions
+            const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        $(entry.target).addClass('active');
+                        // If it contains metric counters, spin them up
+                        if ($(entry.target).find('.count-me').length > 0) {
+                            startCounters();
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            $('.reveal-element').each(function() {
+                revealObserver.observe(this);
+            });
+
+            // 2. Automated Interactive Fluid Counter Tallying Logic
+            function startCounters() {
+                $('.count-me').each(function () {
+                    const $this = $(this);
+                    if ($this.hasClass('counted')) return;
+                    $this.addClass('counted');
+                    
+                    const target = parseFloat($this.attr('data-target'));
+                    const decimals = parseInt($this.attr('data-decimals')) || 0;
+                    const duration = 2000; // 2 seconds
+                    const startTime = performance.now();
+
+                    function updateCounter(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        
+                        // EaseOutQuad rate equation curve
+                        const easeProgress = progress * (2 - progress);
+                        const currentValue = easeProgress * target;
+
+                        $this.text(currentValue.toFixed(decimals));
+
+                        if (progress < 1) {
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            $this.text(target.toFixed(decimals));
+                        }
+                    }
+                    requestAnimationFrame(updateCounter);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

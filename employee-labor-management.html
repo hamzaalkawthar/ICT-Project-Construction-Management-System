@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildCore Admin | Employee & Labor Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div id="adminSidebar" data-active="employee-labor-management"></div>
+        <main class="main-content">
+            <header class="page-header">
+                <div><div class="eyebrow">Admin Control</div><h1 class="page-title">Employee & Labor Management</h1><p class="page-copy">Maintain worker records, attendance, payroll, and site assignments with clean administrative control.</p></div>
+                <button class="btn btn-warning fw-bold"><i class="fa-solid fa-user-plus me-2"></i>Add Worker</button>
+            </header>
+            <section class="row g-3 mb-4">
+                <div class="col-md-3"><div class="card metric-card"><div class="metric-label">Workers</div><div class="metric-value">148</div></div></div>
+                <div class="col-md-3"><div class="card metric-card blue"><div class="metric-label">Present Today</div><div class="metric-value">132</div></div></div>
+                <div class="col-md-3"><div class="card metric-card green"><div class="metric-label">Payroll Ready</div><div class="metric-value">94%</div></div></div>
+                <div class="col-md-3"><div class="card metric-card red"><div class="metric-label">Exceptions</div><div class="metric-value">12</div></div></div>
+            </section>
+            <section class="row g-4">
+                <div class="col-lg-4"><div class="card p-4 h-100"><h5 class="fw-bold mb-3">Core Capabilities</h5><ul class="feature-list"><li><i class="fa-solid fa-circle-check"></i><span>Maintain clear worker profile records</span></li><li><i class="fa-solid fa-circle-check"></i><span>Track on-site daily attendance</span></li><li><i class="fa-solid fa-circle-check"></i><span>Manage complex salaries and payroll</span></li><li><i class="fa-solid fa-circle-check"></i><span>Assign workers to specific physical sites</span></li></ul></div></div>
+                <div class="col-lg-8"><div class="card p-4"><h5 class="fw-bold mb-3">Labor Allocation</h5><div class="table-responsive"><table class="table align-middle"><thead><tr><th>Team</th><th>Site</th><th>Attendance</th><th>Payroll</th></tr></thead><tbody><tr><td class="fw-semibold">Concrete Crew A</td><td>Tower Site</td><td>38 / 42</td><td><span class="status-pill warning">Review</span></td></tr><tr><td class="fw-semibold">Steel Fixers</td><td>Hangar Annex</td><td>24 / 25</td><td><span class="status-pill success">Ready</span></td></tr><tr><td class="fw-semibold">Electrical Team</td><td>Substation</td><td>18 / 20</td><td><span class="status-pill success">Ready</span></td></tr></tbody></table></div></div></div>
+            </section>
+            <div id="adminFooter"></div>
+        </main>
+    </div>
+    <script src="admin-layout.js"></script>
+</body>
+</html>

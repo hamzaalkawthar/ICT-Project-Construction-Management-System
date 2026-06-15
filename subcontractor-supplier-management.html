@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildCore Admin | Subcontractor & Supplier Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div id="adminSidebar" data-active="subcontractor-supplier-management"></div>
+        <main class="main-content">
+            <header class="page-header">
+                <div><div class="eyebrow">Admin Control</div><h1 class="page-title">Subcontractor & Supplier Management</h1><p class="page-copy">Store contractor records, supplier contacts, vendor agreements, and delivery performance metrics.</p></div>
+                <button class="btn btn-warning fw-bold"><i class="fa-solid fa-handshake me-2"></i>Add Vendor</button>
+            </header>
+            <section class="row g-3 mb-4">
+                <div class="col-md-3"><div class="card metric-card"><div class="metric-label">Vendors</div><div class="metric-value">74</div></div></div>
+                <div class="col-md-3"><div class="card metric-card blue"><div class="metric-label">Contracts</div><div class="metric-value">39</div></div></div>
+                <div class="col-md-3"><div class="card metric-card green"><div class="metric-label">On-Time Delivery</div><div class="metric-value">91%</div></div></div>
+                <div class="col-md-3"><div class="card metric-card red"><div class="metric-label">At Risk</div><div class="metric-value">6</div></div></div>
+            </section>
+            <section class="row g-4">
+                <div class="col-lg-4"><div class="card p-4 h-100"><h5 class="fw-bold mb-3">Core Capabilities</h5><ul class="feature-list"><li><i class="fa-solid fa-circle-check"></i><span>Store external contractor information</span></li><li><i class="fa-solid fa-circle-check"></i><span>Manage primary supplier contact profiles</span></li><li><i class="fa-solid fa-circle-check"></i><span>Track formal contracts and vendor agreements</span></li><li><i class="fa-solid fa-circle-check"></i><span>Monitor overall supplier delivery performance</span></li></ul></div></div>
+                <div class="col-lg-8"><div class="card p-4"><h5 class="fw-bold mb-3">Vendor Performance</h5><div class="table-responsive"><table class="table align-middle"><thead><tr><th>Vendor</th><th>Category</th><th>Contract</th><th>Performance</th></tr></thead><tbody><tr><td class="fw-semibold">Prime Steel Works</td><td>Steel</td><td>Active</td><td><span class="status-pill success">96%</span></td></tr><tr><td class="fw-semibold">Urban ReadyMix</td><td>Concrete</td><td>Active</td><td><span class="status-pill warning">82%</span></td></tr><tr><td class="fw-semibold">Northline Electrical</td><td>MEP</td><td>Renewal</td><td><span class="status-pill success">93%</span></td></tr></tbody></table></div></div></div>
+            </section>
+            <div id="adminFooter"></div>
+        </main>
+    </div>
+    <script src="admin-layout.js"></script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildCore | Create Profile</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1E293B;
+            --accent-color: #F59E0B;
+            --bg-color: #F8FAFC;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #F1F5F9, #E2E8F0);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+        @keyframes cardSlideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .signup-card {
+            border: none;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.08);
+            background: #ffffff;
+            width: 100%;
+            max-width: 680px;
+            animation: cardSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .brand-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 24px 24px 0 0;
+        }
+        .form-control, .form-select {
+            padding: 0.7rem 1rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 10px;
+            background-color: #F8FAFC;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15);
+            border-color: var(--accent-color);
+        }
+        .password-toggle {
+            cursor: pointer;
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-left: none;
+            border-radius: 0 10px 10px 0;
+            color: #94A3B8;
+        }
+        .btn-register {
+            background-color: var(--accent-color);
+            color: #111827;
+            font-weight: 700;
+            border: none;
+            padding: 0.85rem;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+        .btn-register:hover {
+            background-color: #D97706;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.25);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container p-2">
+        <div class="signup-card mx-auto">
+            <!-- Brand Section Header -->
+            <div class="brand-header text-center">
+                <a class="text-white d-flex align-items-center justify-content-center text-decoration-none h3 fw-bold m-0" href="index.html">
+                    <i class="fa-solid fa-helmet-safety me-2" style="color: var(--accent-color)"></i>
+                    BUILD<span style="color: var(--accent-color)">CORE</span>
+                </a>
+                <p class="text-white-50 m-0 small mt-2">Initialize your universal corporate contractor license</p>
+            </div>
+
+            <!-- Form Content Block -->
+            <div class="p-4 p-sm-5 pt-4">
+                <form id="signupForm" novalidate>
+                    
+                    <h5 class="fw-bold text-dark mb-4 border-bottom pb-2"><i class="fa-regular fa-user me-2 text-warning"></i>Personal & Company Details</h5>
+                    
+                    <div class="row g-3 mb-3">
+                        <!-- Full Name: Accepts Text and Numbers both -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-medium text-secondary small">Full Name (Text & Numbers allowed)</label>
+                            <input type="text" class="form-control text-and-numbers" placeholder="e.g. Hamza 102" required>
+                            <div class="invalid-feedback">Please provide your name.</div>
+                        </div>
+                        <!-- CNIC: Strictly Only Numbers accepted -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-medium text-secondary small">CNIC / National ID (Numbers Only)</label>
+                            <input type="text" class="form-control strict-numbers-only" maxlength="15" placeholder="e.g. 4210123456789" required pattern="[0-9]{13,15}">
+                            <div class="invalid-feedback">Please enter a valid numeric identification sequence.</div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-medium text-secondary small">Email Address</label>
+                            <input type="email" class="form-control" placeholder="john@company.com" required>
+                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                        </div>
+                        <!-- Phone: Strictly Only Numbers accepted -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-medium text-secondary small">Phone Number (Numbers Only)</label>
+                            <input type="tel" class="form-control strict-numbers-only" maxlength="12" placeholder="e.g. 03001234567" required pattern="[0-9]{10,12}">
+                            <div class="invalid-feedback">Please enter a valid numeric phone number.</div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <!-- Company Name: Accepts Text and Numbers both -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-medium text-secondary small">Company / Outfit Name (Text & Numbers)</label>
+                            <input type="text" class="form-control text-and-numbers" placeholder="e.g. Apex 7 Builders" required>
+                            <div class="invalid-feedback">Company name is required.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-medium text-secondary small">Primary Operation Scope</label>
+                            <select class="form-select" required>
+                                <option value="" disabled selected>Choose field specialty...</option>
+                                <option>Residential Infrastructure</option>
+                                <option>Commercial Operations</option>
+                                <option>Specialized Subcontracting</option>
+                            </select>
+                            <div class="invalid-feedback">Please choose an operation scope.</div>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold text-dark mb-4 border-bottom pb-2"><i class="fa-solid fa-shield-halved me-2 text-warning"></i>Credential Access Keys</h5>
+
+                    <div class="row g-3 mb-4">
+                        <!-- Password Field 1 -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-medium text-secondary small">Create Password</label>
+                            <div class="input-group">
+                                <input type="password" id="passMain" class="form-control border-end-0" placeholder="••••••••" required>
+                                <span class="input-group-text password-toggle toggle-btn-trigger" data-target="passMain">
+                                    <i class="fa-regular fa-eye icon-state"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- Password Field 2 -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-medium text-secondary small">Confirm Password</label>
+                            <div class="input-group">
+                                <input type="password" id="passConfirm" class="form-control border-end-0" placeholder="••••••••" required>
+                                <span class="input-group-text password-toggle toggle-btn-trigger" data-target="passConfirm">
+                                    <i class="fa-regular fa-eye icon-state"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-register w-100 d-flex align-items-center justify-content-center gap-2 mb-4">
+                        Finalize Account Deployment <i class="fa-solid fa-user-plus"></i>
+                    </button>
+                </form>
+
+                <div class="text-center border-top pt-4">
+                    <p class="text-muted small mb-2">Already have an active workspace?</p>
+                    <a href="login.html" class="text-decoration-none text-dark fw-bold">Sign In to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            
+            // 1. Strict real-time listener to completely block non-numeric keystrokes
+            $('.strict-numbers-only').on('input', function() {
+                // Regex flags globally to remove anything that isn't a direct number (0-9)
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+
+            // 2. Reusable Multi-Target Show/Hide Input Functionality
+            $('.toggle-btn-trigger').on('click', function() {
+                const targetId = $(this).attr('data-target');
+                const targetInput = $('#' + targetId);
+                const eyeIcon = $(this).find('.icon-state');
+
+                if (targetInput.attr('type') === 'password') {
+                    targetInput.attr('type', 'text');
+                    eyeIcon.removeClass('fa-eye').addClass('fa-eye-slash');
+                } else {
+                    targetInput.attr('type', 'password');
+                    eyeIcon.removeClass('fa-eye-slash').addClass('fa-eye');
+                }
+            });
+
+            // 3. Form Validation Check Logic
+            $('#signupForm').on('submit', function(e) {
+                e.preventDefault();
+                const pass = $('#passMain').val();
+                const confirmPass = $('#passConfirm').val();
+
+                // Dynamic CSS class triggering for error evaluation highlights
+                if (!this.checkValidity()) {
+                    $(this).addClass('was-validated');
+                    return false;
+                }
+
+                if (pass !== confirmPass) {
+                    $('#passConfirm').addClass('is-invalid');
+                    alert("Verification mismatch: Passwords entries must be identical.");
+                    return false;
+                } else {
+                    $('#passConfirm').removeClass('is-invalid');
+                }
+
+                alert("Onboarding successful! Loading Workspace Console.");
+                window.location.href = 'admin.html';
+            });
+        });
+    </script>
+</body>
+</html>

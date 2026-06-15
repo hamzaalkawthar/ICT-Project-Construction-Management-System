@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildCore Admin | Project Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div id="adminSidebar" data-active="project-management"></div>
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <div class="eyebrow">Admin Control</div>
+                    <h1 class="page-title">Project Management</h1>
+                    <p class="page-copy">Create, supervise, and control every construction project from one portfolio command page.</p>
+                </div>
+                <button class="btn btn-warning fw-bold"><i class="fa-solid fa-circle-plus me-2"></i>Create Project</button>
+            </header>
+            <section class="card module-hero p-4 mb-4">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-7">
+                        <span class="status-pill warning mb-3">Portfolio Control</span>
+                        <h2 class="fw-bold mb-2">Track project progress, deadlines, milestones, and live status with executive clarity.</h2>
+                        <p class="text-white-50 mb-0">The project office can compare site delivery, identify delays, and coordinate handovers before risks become expensive.</p>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="row g-3">
+                            <div class="col-6"><div class="bg-white bg-opacity-10 rounded-2 p-3"><div class="small text-white-50">Active Projects</div><div class="h3 fw-bold m-0">12</div></div></div>
+                            <div class="col-6"><div class="bg-white bg-opacity-10 rounded-2 p-3"><div class="small text-white-50">On Track</div><div class="h3 fw-bold m-0">86%</div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="row g-4">
+                <div class="col-lg-4">
+                    <div class="card p-4 h-100">
+                        <h5 class="fw-bold mb-3">Core Capabilities</h5>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-circle-check"></i><span>Create and manage construction projects</span></li>
+                            <li><i class="fa-solid fa-circle-check"></i><span>Track project progress systematically</span></li>
+                            <li><i class="fa-solid fa-circle-check"></i><span>Set project deadlines and milestones</span></li>
+                            <li><i class="fa-solid fa-circle-check"></i><span>Monitor project status in real time</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card p-4">
+                        <h5 class="fw-bold mb-3">Live Project Register</h5>
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead><tr><th>Project</th><th>Phase</th><th>Deadline</th><th>Status</th></tr></thead>
+                                <tbody>
+                                    <tr><td class="fw-semibold">Metropolitan Commercial Tower</td><td>Superstructure</td><td>Aug 18, 2026</td><td><span class="status-pill success">On Track</span></td></tr>
+                                    <tr><td class="fw-semibold">Aviation Hangar Annex</td><td>MEP Rough-ins</td><td>Sep 04, 2026</td><td><span class="status-pill warning">Watch</span></td></tr>
+                                    <tr><td class="fw-semibold">Waterfront Substation</td><td>Foundation</td><td>Jul 22, 2026</td><td><span class="status-pill success">Stable</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div id="adminFooter"></div>
+        </main>
+    </div>
+    <script src="admin-layout.js"></script>
+</body>
+</html>

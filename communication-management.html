@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildCore Admin | Communication Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div id="adminSidebar" data-active="communication-management"></div>
+        <main class="main-content">
+            <header class="page-header">
+                <div><div class="eyebrow">Admin Control</div><h1 class="page-title">Communication Management</h1><p class="page-copy">Coordinate messaging, push alerts, announcements, and planning meetings across all project teams.</p></div>
+                <button class="btn btn-warning fw-bold"><i class="fa-solid fa-bullhorn me-2"></i>Broadcast</button>
+            </header>
+            <section class="row g-3 mb-4">
+                <div class="col-md-3"><div class="card metric-card"><div class="metric-label">Messages</div><div class="metric-value">3.8K</div></div></div>
+                <div class="col-md-3"><div class="card metric-card blue"><div class="metric-label">Alerts</div><div class="metric-value">26</div></div></div>
+                <div class="col-md-3"><div class="card metric-card green"><div class="metric-label">Read Rate</div><div class="metric-value">97%</div></div></div>
+                <div class="col-md-3"><div class="card metric-card red"><div class="metric-label">Urgent</div><div class="metric-value">3</div></div></div>
+            </section>
+            <section class="row g-4">
+                <div class="col-lg-4"><div class="card p-4 h-100"><h5 class="fw-bold mb-3">Core Capabilities</h5><ul class="feature-list"><li><i class="fa-solid fa-circle-check"></i><span>Utilize localized, direct team messaging</span></li><li><i class="fa-solid fa-circle-check"></i><span>Deploy push notifications and critical alerts</span></li><li><i class="fa-solid fa-circle-check"></i><span>Broadcast urgent broad-team announcements</span></li><li><i class="fa-solid fa-circle-check"></i><span>Schedule engineering and planning meetings</span></li></ul></div></div>
+                <div class="col-lg-8"><div class="card p-4"><h5 class="fw-bold mb-3">Communication Queue</h5><div class="table-responsive"><table class="table align-middle"><thead><tr><th>Channel</th><th>Audience</th><th>Purpose</th><th>Status</th></tr></thead><tbody><tr><td class="fw-semibold">Safety Alert</td><td>All Sites</td><td>Weather response</td><td><span class="status-pill danger">Urgent</span></td></tr><tr><td class="fw-semibold">Planning Meeting</td><td>Engineering</td><td>MEP sequence</td><td><span class="status-pill warning">Scheduled</span></td></tr><tr><td class="fw-semibold">Client Update</td><td>Stakeholders</td><td>Monthly progress</td><td><span class="status-pill success">Sent</span></td></tr></tbody></table></div></div></div>
+            </section>
+            <div id="adminFooter"></div>
+        </main>
+    </div>
+    <script src="admin-layout.js"></script>
+</body>
+</html>
